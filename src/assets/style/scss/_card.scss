@@ -1,0 +1,252 @@
+.dynamic-journal {
+  .card-outer {
+    @include transition2;
+    max-height: 9999px;
+    opacity: 1;
+    overflow: hidden;
+    &.hidden {
+      margin-bottom: 0;
+      max-height: 0;
+      opacity: 0;
+      * {
+        margin: 0;
+        max-height: 0;
+        padding: 0;
+      }
+    }
+    &.full {
+      overflow: visible;
+      position: relative;
+      z-index: 7777;
+      .card-inner {
+        box-shadow: none;
+        margin: 0;
+        padding-bottom: 8px;
+      }
+      .card-detail {
+        margin-top: 16px;
+        max-height: 1000px;
+        opacity: 1;
+        * {
+          margin: 0;
+          max-height: 1000px;
+          padding: 0;
+        }
+      }
+    }
+    &.completed,
+    &.declined {
+      margin-bottom: 0;
+      .card-inner {
+        margin-top: -1000px;
+        left: -110%;
+        right: auto;
+      }
+    }
+    &.snoozed {
+      margin-bottom: 0;
+      .card-inner {
+        margin-top: -1000px;
+        left: auto;
+        right: -110%;
+      }
+    }
+  }
+  .card-inner {
+    -webkit-transition: margin-left 0.3s ease 0s, margin-right 0.3s ease 0s, max-height 0.3s ease 0s, left 0.3s ease 0s, right 0.3s ease 0s, margin-top 0.7s ease .2s;
+    transition: margin-left 0.3s ease 0s, margin-right 0.3s ease 0s, max-height 0.3s ease 0s, left 0.3s ease 0s, right 0.3s ease 0s, margin-top 0.7s ease .2s;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+    margin: 0 16px 16px;
+    max-height: 9999px;
+    position: relative;
+    left: 0;
+    right: 0;
+  }
+}
+
+.card-header {
+  padding: 12px 16px;
+  &.abs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  &.dark {
+    .category {
+      color: rgba(255, 255, 255, .4);
+    }
+    .title {
+      color: #fff;
+    }
+  }
+  .category {
+    color: rgba(0, 0, 0, .54);
+    font-size: em(16);
+    margin-bottom: 0;
+  }
+  .title {
+    color: #000;
+    font-weight: 400;
+    font-size: em(24);
+    margin-bottom: 0;
+  }
+}
+
+.card-text {
+  padding: 16px;
+}
+
+.icon-actions {
+  padding: 10px 8px;
+  text-align: right;
+  line-height: 0;
+  .material-icons {
+    color: #6d6d6d!important;
+    font-size: 28px!important;
+    &.disable {
+      color: rgba(0, 0, 0, .3)!important;
+    }
+  }
+}
+
+/* coach information */
+.coach-wrapper {
+  padding: 0 16px 16px;
+  .coach-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    margin-right: 16px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .coach-info {
+    overflow: hidden;
+    padding-top: 10px;
+    .coach-name {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 20px;
+      margin-bottom: 0;
+    }
+    .coach-type {
+      color: rgba(255, 255, 255, .4);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 20px;
+    }
+  }
+}
+
+/* collection full card */
+.full-card-outer {
+  @include transition2;
+  display: block;
+  background-color: rgba(0, 0, 0, .7);
+  position: fixed;
+  bottom: 56px;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 9999;
+  opacity: 0;
+  top: 100px;
+  visibility: hidden;
+  &.show {
+    opacity: 1;
+    top: 0;
+    visibility: visible;
+    .full-card {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .full-card-inner {
+    margin: 0 auto;
+    background-color: #f6f6f6;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0;
+  }
+  .full-card {
+    @include transition2;
+    background-color: #fff;
+    padding-bottom: 8px;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    .cc-block.bg-img {
+      border-radius: 0;
+    }
+    .abs-content {
+      font-size: em(24);
+    }
+  }
+}
+
+@include min(768px) {
+  .full-card-outer {
+    bottom: 0;
+    width: 640px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    &.show {
+      z-index: 12000;
+    }
+  }
+}
+
+/* close detail button */
+.close-detail {
+  display: block!important;
+  position: fixed!important;
+  z-index: 99;
+  top: 5px;
+  right: 5px;
+  span {
+    color: rgba(158, 158, 158, 0.87)!important;
+  }
+}
+
+/* card detail */
+.card-detail {
+  @include transition2;
+  background-color: #fff;
+  color: #757575;
+  padding: 20px 20px 0;
+  @include max(767px) {
+    padding: 16px 16px 0;
+  }
+}
+
+/* card actions */
+.card-actions {
+  padding: 8px;
+  text-align: right;
+  button {
+    margin-left: 8px!important;
+    &:first-child {
+      margin-left: 0!important;
+    }
+  }
+  .grey {
+    color: rgba(33, 33, 33, .6)!important;
+  }
+  .purple {
+    color: #673ab7!important;
+    &:hover {
+      background-color: #eae5f2!important;
+    }
+  }
+}
+
