@@ -2,6 +2,7 @@ import React from 'react'
 import FontIcon from 'material-ui/FontIcon'
 import IconButton from 'material-ui/IconButton'
 import ConversationsMenu from '../ConversationsMenu'
+import { NavLink } from 'react-router-dom'
 
 export class LeftNavigation extends React.Component {
   closeLeftNav() {

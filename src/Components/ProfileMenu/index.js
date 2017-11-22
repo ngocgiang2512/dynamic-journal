@@ -8,7 +8,7 @@ export class ProfileMenu extends React.Component {
       <div className={showProfileMenu ? "profileMenu show" : "profileMenu"}>
         <div className="header">
           <div className="avatar">
-            <img src="https://farm5.staticflickr.com/4524/26675317289_b36812e025_t.jpg" />
+            <img alt="avatar" src="https://farm5.staticflickr.com/4524/26675317289_b36812e025_t.jpg" />
           </div>
           <div className="user-info">
             <p className="user-name">James Stokes</p>

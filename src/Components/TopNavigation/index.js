@@ -24,7 +24,7 @@ export class TopNavigation extends React.Component {
           </FontIcon>
         </IconButton>
 
-        <h1>Title</h1>
+        <h1>{this.props.title}</h1>
 
         <div className="moreIcon">
           <IconButton className="iconButton" onClick={this.handleClickMoreIcon.bind(this)}>

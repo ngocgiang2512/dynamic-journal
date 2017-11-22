@@ -164,6 +164,7 @@ export class DynamicJournal extends React.Component {
   render() {
     let { selectedTabIndex, showLeftNav, fullCardId } = this.props.pageSettings
     console.log(this.props)
+    console.log(this.props.location.pathname)
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
