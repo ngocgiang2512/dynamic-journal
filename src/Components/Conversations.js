@@ -9,13 +9,7 @@ import IconLocationOn from 'material-ui/svg-icons/communication/location-on'
 import TopNavigation from './TopNavigation'
 import LeftNavigation from './LeftNavigation'
 import ProfileMenu from './ProfileMenu'
-import Collection from './Cards/Collection'
-import CollectionDetail  from './Cards/CollectionDetail'
-import ConnectionRequest from './Cards/ConnectionRequest'
-import Content from './Cards/Content'
-
-import moment from 'moment'
-import { cardsParser, scrollIt } from '../utils'
+import { conversations } from '../data'
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -27,10 +21,10 @@ const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>
 const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>
 const nearbyIcon = <IconLocationOn />
 
-export class DynamicJournal extends React.Component {
+export class Conversations extends React.Component {
   handleResizeWindow = () => {
     let bodyWidth = document.body.clientWidth
-    if (bodyWidth < 1024) {
+    if (bodyWidth < 768) {
       document.body.classList.remove('showLeftNav')
       this.props.updatePageSettings({showLeftNav: false})
       this.props.updatePageSettings({showConversationsMenu: false})
@@ -46,6 +40,8 @@ export class DynamicJournal extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResizeWindow)
+    this.props.updatePageSettings({showLeftNav: true})
+    this.props.updatePageSettings({showConversationsMenu: true})
   }
 
   componentWillUnmount() {
@@ -53,21 +49,11 @@ export class DynamicJournal extends React.Component {
   }
 
   componentDidUpdate() {
-    let { fullCardId, firstActiveCardProcessed, showLeftNav } = this.props.pageSettings
-    if (fullCardId !== null) {
-      document.body.classList.add('no-scroll')
-    } else {
-      document.body.classList.remove('no-scroll')
-    }
+    let { showLeftNav } = this.props.pageSettings
     if (showLeftNav) {
       document.body.classList.add('showLeftNav')
     } else {
       document.body.classList.remove('showLeftNav')
-    }
-    let cardProcessedId = this.props.pageSettings.cardProcessedId
-    if (cardProcessedId !== null) {
-      let element = document.getElementById(cardProcessedId)
-      scrollIt(element, 300, 'easeOutQuad', firstActiveCardProcessed)
     }
   }
 
@@ -79,78 +65,14 @@ export class DynamicJournal extends React.Component {
     this.props.updatePageSettings({selectedTabIndex: index})
   }
 
-  getTimeInfo(item, index) {
-    let cardHour = item.hour
-    let cardDate = item.cardDate
-    let cardTime = ''
-
-    if (cardDate.format('L') !== moment().format('L')) {
-      cardTime = cardDate.format('dddd')
-    } else {
-      if (cardHour < 12) {
-        cardTime = 'This morning'
-      } else if (cardHour < 17) {
-        cardTime = 'This afternoon'
-      } else if (cardHour < 20) {
-        cardTime = 'This evening'
-      } else {
-        cardTime = 'Before Bed'
-      }
-    }
-
-    return (
-      <div id={index} key={index} className={item.status + " time-info"}>
-        <p className="date">{cardDate.format('dddd Do MMMM')}</p>
-        <p className="day">{cardTime}</p>
-      </div>
-    )
-  }
-
-  getCard(card, index) {
-    if (card.type === "connection-request") {
-      return <ConnectionRequest order={index} key={index} {...card} {...this.props} />
-    } else if (card.type === "content") {
-      return <Content order={index} key={index} {...card} {...this.props} />
-    } else if (card.type === "collection") {
-      return <Collection order={index} key={index} {...card} {...this.props} />
-    } else {
-      return null
-    }
-  }
-
-  getJournal(cards) {
-    let newItems = cardsParser(cards)
-    return newItems.map((item, index) => {
-      if (item.hasOwnProperty('cardDate')) {
-        return this.getTimeInfo(item, index)
-      } else {
-        return this.getCard(item, index)
-      }
-    })
-  }
-
-  getCardDetail(cards) {
-    return cards.map((card, index) => {
-      if (card.type === 'collection') {
-        return <CollectionDetail key={index} {...card} {...this.props} />
-      } else {
-        return null
-      }
-    })
-  }
-
   closeProfileMenu() {
     this.props.updatePageSettings({showProfileMenu: false})
   }
 
   getOverlay() {
-    let { fullCardId, showProfileMenu } = this.props.pageSettings
+    let { showProfileMenu } = this.props.pageSettings
 
-    if (fullCardId !== null) {
-      return (
-        <div className="overlay show" onClick={this.closeLeftNav.bind(this)}></div>
-      )
-    } else if (showProfileMenu) {
+    if (showProfileMenu) {
       return (
         <div className="overlay transparent" onClick={this.closeProfileMenu.bind(this)}></div>
       )
@@ -161,22 +83,47 @@ export class DynamicJournal extends React.Component {
     }
   }
 
+  getConversationsContent() {
+    let { showLeftNav, showConversationsMenu, activeCurrentTab, activeConsId } = this.props.pageSettings
+    let className = null;
+    let list = activeCurrentTab ? conversations.current : conversations.archived
+    let activeItem = list[0].id
+    list.map(item => {
+      if (item.id === activeConsId) {
+        activeItem = item
+        return null
+      }
+      return null
+    })
+
+    if (showLeftNav) {
+      if (showConversationsMenu) {
+        className = "narrow"
+      } else {
+        className = "middle"
+      }
+    }
+
+    return (
+      <div className={"app-inner conversations " + className}>
+        <p>{activeItem.content}</p>
+      </div>
+    )
+  }
+
   render() {
-    let { selectedTabIndex, showLeftNav, fullCardId } = this.props.pageSettings
+    let { selectedTabIndex, showLeftNav } = this.props.pageSettings
     console.log(this.props)
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div className={showLeftNav && fullCardId === null ? "app-wrapper showLeftNav" : "app-wrapper"}>
+        <div className={showLeftNav ? "app-wrapper showLeftNav" : "app-wrapper"}>
 
           <TopNavigation title="Dynamic Journal" {...this.props} />
           <LeftNavigation {...this.props} />
           <ProfileMenu {...this.props} />
 
-          <div className="app-inner dynamic-journal">
-            {this.getJournal(this.props.cards)}
-            {this.getCardDetail(this.props.cards)}
-          </div>
+          {this.getConversationsContent()}
 
           <div className="bottomNavWrapper">
             <BottomNavigation selectedIndex={selectedTabIndex}>
@@ -206,4 +153,4 @@ export class DynamicJournal extends React.Component {
   }
 }
 
-export default DynamicJournal
+export default Conversations

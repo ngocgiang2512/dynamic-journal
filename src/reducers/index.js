@@ -11,7 +11,8 @@ let initialPageSettings = {
   firstActiveCardProcessed: false,
   showProfileMenu: false,
   showConversationsMenu: false,
-  activeCurrentTab: true
+  activeCurrentTab: true,
+  activeConsId: 1
 }
 
 const pageSettings = (state = initialPageSettings, action) => {

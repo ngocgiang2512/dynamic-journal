@@ -16,14 +16,21 @@ export class ConversationsMenu extends React.Component {
     }
   }
 
+  updateActiveConversation(activeConsId) {
+    this.props.updatePageSettings({activeConsId: activeConsId})
+  }
+
   getConversationsList() {
-    let { activeCurrentTab } = this.props
+    let { activeCurrentTab, activeConsId } = this.props
     let lists = activeCurrentTab ? conversations.current : conversations.archived
 
     return lists.map((item, index) => 
-      <li key={index}>
+      <li key={index} className={activeConsId === item.id ? "active" : null} onClick={this.updateActiveConversation.bind(this, item.id)}>
         <span className="avatar"></span>
-        <span>{item}</span>
+        <div className="content clearfix">
+          <p className="topic">{item.topic}</p>
+          <p className="members">{item.members}</p>
+        </div>
       </li>
     )
   }

@@ -22,7 +22,7 @@ body {
     @include min(768px) {
       padding-right: 15px;
       .topNav {
-        right: 15px;
+        padding-right: 8px;
       }
     }
   }

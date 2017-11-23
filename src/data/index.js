@@ -89,8 +89,76 @@ let cards = [
 ]
 
 let conversations = {
-  current: ["contact 1", "contact 2", "contact 3", "contact 4", "contact 5"],
-  archived: ["contact 6", "contact 7", "contact 8", "contact 9", "contact 10"]
+  current: [
+    {
+      id: 1,
+      topic: "Progress on your Vision",
+      members: "Name",
+      content: "Progress on your Vision"
+    },
+    {
+      id: 2,
+      topic: "Advanced Coaching Skills",
+      members: "ACS Program",
+      content: "Advanced Coaching Skills"
+    },
+    {
+      id: 3,
+      topic: "Roles and Responsibilities",
+      members: "Martin Lewis",
+      content: "Roles and Responsibilities"
+    },
+    {
+      id: 4,
+      topic: "Catch up call",
+      members: "Lucinda Stokes",
+      content: "Catch up call"
+    },
+    {
+      id: 5,
+      topic: "Topic 1",
+      members: "Name",
+      content: "Topic 1"
+    },
+    {
+      id: 6,
+      topic: "Topic 2",
+      members: "Name",
+      content: "Topic 2"
+    },
+    {
+      id: 7,
+      topic: "Topic 3",
+      members: "Name",
+      content: "Topic 3"
+    }
+  ],
+  archived: [
+    {
+      id: 1,
+      topic: "Progress on your Vision",
+      members: "Name",
+      content: "Progress on your Vision"
+    },
+    {
+      id: 5,
+      topic: "Topic 1",
+      members: "Name",
+      content: "Topic 1"
+    },
+    {
+      id: 6,
+      topic: "Topic 2",
+      members: "Name",
+      content: "Topic 2"
+    },
+    {
+      id: 7,
+      topic: "Topic 3",
+      members: "Name",
+      content: "Topic 3"
+    }
+  ]
 }
 
 export { conversations }

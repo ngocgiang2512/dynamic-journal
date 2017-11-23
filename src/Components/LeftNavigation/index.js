@@ -2,7 +2,7 @@ import React from 'react'
 import FontIcon from 'material-ui/FontIcon'
 import IconButton from 'material-ui/IconButton'
 import ConversationsMenu from '../ConversationsMenu'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router'
 
 export class LeftNavigation extends React.Component {
   closeLeftNav() {
@@ -23,7 +23,7 @@ export class LeftNavigation extends React.Component {
   }
 
   render() {
-    let { showConversationsMenu } = this.props.pageSettings
+    let isConversationsPage = this.props.location.pathname === '/conversations'
 
     return (
       <div 
@@ -42,10 +42,10 @@ export class LeftNavigation extends React.Component {
           <div className="leftNavContent">
             <div className="block">
               <ul className="links">
-                <li>
+                <Link to="/" activeClassName="active" >
                   <FontIcon className="material-icons">home</FontIcon>
                   <span>Dynamic Journal</span>
-                </li>
+                </Link>
                 <li>
                   <FontIcon className="material-icons">snooze</FontIcon>
                   <span>Snoozed</span>
@@ -58,10 +58,10 @@ export class LeftNavigation extends React.Component {
             </div>
             <div className="block">
               <ul className="links">
-                <li className={showConversationsMenu ? "active" : null} onClick={this.handleClickOnConversations.bind(this)}>
+                <Link to="/conversations" activeClassName="active" onClick={this.handleClickOnConversations.bind(this)}>
                   <FontIcon className="material-icons">perm_phone_msg</FontIcon>
                   <span>Conversations</span>
-                </li>
+                </Link>
                 <li>
                   <FontIcon className="material-icons">business</FontIcon>
                   <span>Vision Area Name</span>
@@ -170,7 +170,13 @@ export class LeftNavigation extends React.Component {
           </div>
         </main>
 
-        <ConversationsMenu updatePageSettings={this.props.updatePageSettings} {...this.props.pageSettings}/>
+        {
+          isConversationsPage ?
+            <ConversationsMenu updatePageSettings={this.props.updatePageSettings} {...this.props.pageSettings}/>
+            : null
+
+        }
+        
       </div>
     )
   }
