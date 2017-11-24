@@ -70,30 +70,9 @@ export class LeftNavigation extends React.Component {
                   <FontIcon className="material-icons">date_range</FontIcon>
                   <span>Calendar</span>
                 </li>
-              </ul>
-            </div>
-            <div className="block">
-              <h3>Connections</h3>
-              <ul className="links">
                 <li>
-                  <span className="avatar"></span>
-                  <span>Penny Smith</span>
-                </li>
-                <li>
-                  <span className="avatar"></span>
-                  <span>Mark Foster</span>
-                </li>
-                <li>
-                  <span className="avatar"></span>
-                  <span>David Wright</span>
-                </li>
-                <li>
-                  <span className="avatar"></span>
-                  <span>Mary Ellis</span>
-                </li>
-                <li>
-                  <FontIcon className="material-icons">keyboard_arrow_down</FontIcon>
-                  <span>Show all</span>
+                  <FontIcon className="material-icons">perm_contact_calendar</FontIcon>
+                  <span>Connections</span>
                 </li>
               </ul>
             </div>
@@ -136,6 +115,23 @@ export class LeftNavigation extends React.Component {
                 <li>
                   <FontIcon className="material-icons">keyboard_arrow_down</FontIcon>
                   <span>Show more</span>
+                </li>
+              </ul>
+            </div>
+            <div className="block">
+              <h3>Communities</h3>
+              <ul className="links">
+                <li>
+                  <span className="avatar"></span>
+                  <span>Star Coaching</span>
+                </li>
+                <li>
+                  <span className="avatar"></span>
+                  <span>ICF Foundation</span>
+                </li>
+                <li>
+                  <FontIcon className="material-icons">keyboard_arrow_down</FontIcon>
+                  <span>Show all</span>
                 </li>
               </ul>
             </div>
