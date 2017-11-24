@@ -2,7 +2,7 @@ import React from 'react'
 import FontIcon from 'material-ui/FontIcon'
 import IconButton from 'material-ui/IconButton'
 import ConversationsMenu from '../ConversationsMenu'
-import { Link } from 'react-router'
+import { NavLink } from 'react-router-dom'
 
 export class LeftNavigation extends React.Component {
   closeLeftNav() {
@@ -42,10 +42,10 @@ export class LeftNavigation extends React.Component {
           <div className="leftNavContent">
             <div className="block">
               <ul className="links">
-                <Link to="/" activeClassName="active" >
+                <NavLink exact to="/" activeClassName="active">
                   <FontIcon className="material-icons">home</FontIcon>
                   <span>Dynamic Journal</span>
-                </Link>
+                </NavLink>
                 <li>
                   <FontIcon className="material-icons">snooze</FontIcon>
                   <span>Snoozed</span>
@@ -58,10 +58,10 @@ export class LeftNavigation extends React.Component {
             </div>
             <div className="block">
               <ul className="links">
-                <Link to="/conversations" activeClassName="active" onClick={this.handleClickOnConversations.bind(this)}>
+                <NavLink to="/conversations" activeClassName="active" onClick={this.handleClickOnConversations.bind(this)}>
                   <FontIcon className="material-icons">perm_phone_msg</FontIcon>
                   <span>Conversations</span>
-                </Link>
+                </NavLink>
                 <li>
                   <FontIcon className="material-icons">business</FontIcon>
                   <span>Vision Area Name</span>
