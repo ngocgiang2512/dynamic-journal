@@ -23,11 +23,12 @@ export class LeftNavigation extends React.Component {
   }
 
   render() {
+    let { showConversationsMenu } = this.props.pageSettings
     let isConversationsPage = this.props.location.pathname === '/conversations'
 
     return (
       <div 
-        className="leftNav"
+        className={showConversationsMenu ? "leftNav fullWidth" : "leftNav"}
         onMouseOver={this.handleMouseOver.bind(this)}
         onMouseLeave={this.handleMouseLeave.bind(this)}>
         <main>
@@ -37,7 +38,7 @@ export class LeftNavigation extends React.Component {
                 clear
               </FontIcon>
             </IconButton>
-            <h2>Title</h2>
+            <h2>Coaching Cloud</h2>
           </header>
           <div className="leftNavContent">
             <div className="block">

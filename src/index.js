@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import reducer from './reducers'
 import DynamicJournalContainer from './Components/DynamicJournalContainer'
 import ConversationsContainer from './Components/ConversationsContainer'
+import MainContainer from './Components/MainContainer'
 import './assets/style/style.css'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
@@ -19,12 +20,12 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <div>
+      <MainContainer>
         <Switch>
           <Route exact path='/' component={DynamicJournalContainer}/>
           <Route path='/conversations' component={ConversationsContainer}/>
         </Switch>
-      </div>
+      </MainContainer>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

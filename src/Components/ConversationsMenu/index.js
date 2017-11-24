@@ -17,6 +17,11 @@ export class ConversationsMenu extends React.Component {
   }
 
   updateActiveConversation(activeConsId) {
+    let { isSmallScreen } = this.props
+    if (isSmallScreen) {
+      this.props.updatePageSettings({showConversationsMenu: false})
+      this.props.updatePageSettings({showLeftNav: false})
+    }
     this.props.updatePageSettings({activeConsId: activeConsId})
   }
 
@@ -43,7 +48,7 @@ export class ConversationsMenu extends React.Component {
           <IconButton className="backIcon" onClick={this.closeConversationsMenu.bind(this)}>
             <FontIcon className="material-icons">keyboard_arrow_left</FontIcon>
           </IconButton>
-          <h2>Conversations</h2>
+          <h2>Conversations List</h2>
         </header>
         <div className="tabTitle clearfix">
           <h3 className={activeCurrentTab ? "active" : null} onClick={this.updateActiveTab.bind(this, 'current')}>Current</h3>

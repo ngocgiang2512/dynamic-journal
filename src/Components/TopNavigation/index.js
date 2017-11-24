@@ -15,6 +15,14 @@ export class TopNavigation extends React.Component {
 
   render() {
     let { showLeftNav } = this.props.pageSettings
+    let pathname = this.props.location.pathname
+    
+    let pageTitle = ''
+    if (pathname === '/') {
+      pageTitle = 'Dynamic Journal'
+    } else if (pathname === '/conversations') {
+      pageTitle = 'Conversations'
+    }
 
     return (
       <div className="topNav clearfix"> 
@@ -24,7 +32,7 @@ export class TopNavigation extends React.Component {
           </FontIcon>
         </IconButton>
 
-        <h1>{this.props.title}</h1>
+        <h1>{pageTitle}</h1>
 
         <div className="moreIcon">
           <IconButton className="iconButton" onClick={this.handleClickMoreIcon.bind(this)}>

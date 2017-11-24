@@ -111,6 +111,11 @@
   &.show {
     transform: translateX(0);
   }
+  &.fullWidth {
+    @include max(767px) {
+      width: 100%;
+    }
+  }
   main {
     position: absolute;
     top: 0;
@@ -286,6 +291,15 @@ body.showLeftNav {
   @include max(767px) {
     height: 100%;
     overflow: hidden;
+  }
+}
+
+body.showLeftNav {
+  @include max(767px) {
+    .overlay {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
 

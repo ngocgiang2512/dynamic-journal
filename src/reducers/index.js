@@ -12,7 +12,8 @@ let initialPageSettings = {
   showProfileMenu: false,
   showConversationsMenu: false,
   activeCurrentTab: true,
-  activeConsId: 1
+  activeConsId: 1,
+  isSmallScreen: true
 }
 
 const pageSettings = (state = initialPageSettings, action) => {
